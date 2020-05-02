@@ -57,14 +57,19 @@ let profiles = {
   } catch (error) {
     console.log(`this is the ${error}`);
   }
-})().then(() => {
-  let data_to_json = JSON.stringify(profiles, null, 2);
-  fs.writeFileSync("json/profile_data.json", data_to_json, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(chalk.green("File has been written"));
-    }
+})()
+  .then(() => {
+    let data_to_json = JSON.stringify(profiles, null, 2);
+    fs.writeFileSync("json/profile_data.json", data_to_json, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(chalk.green("File has been written"));
+      }
+    });
+    console.timeEnd("Process Time");
+  })
+  .then(() => {
+    console.log(`Profiles found: ${profiles.profile_found.length}`);
+    console.log(`Profiles not found: ${profiles.profile_not_found.length}`);
   });
-  console.timeEnd("Process Time");
-});
